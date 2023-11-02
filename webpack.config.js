@@ -1,5 +1,6 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
@@ -12,19 +13,38 @@ module.exports = {
     filename: "[name].[contenthash].js",
     clean: true,
   },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "public"),
+    },
+    port: 3000,
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       title: "Countries | Home",
-      template: path.resolve(__dirname, "src/index.html"),
-      filename: 'index.html',
-      chunks: ['index'], 
+      template: path.resolve(__dirname, "./src/index.html"),
+      filename: "index.html",
+      chunks: ["index"],
     }),
 
     new HtmlWebpackPlugin({
-        title: "Countries | About",
-        template: path.resolve(__dirname, "src/pages/about.html"),
-        filename: 'about.html',
-        chunks: ['about']
-    })
-  ]
+      title: "Countries | About",
+      template: path.resolve(__dirname, "src/pages/about.html"),
+      filename: "about.html",
+      chunks: ["about"],
+    }),
+    new MiniCssExtractPlugin(),
+  ],
 };
