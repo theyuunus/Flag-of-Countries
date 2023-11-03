@@ -3,6 +3,7 @@ import "../css/index.css"
 import request from "./request"
 import { createCountries } from "./UpdateUI"
 import "./filter"
+import "./mode"
 
 const API = "https://restcountries.com/v3.1/all"
 
