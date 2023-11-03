@@ -1,6 +1,7 @@
 const cardsEL = document.querySelector('.cards')
 
 export const createCountries = (countries) => {
+  cardsEL.innerHTML =''
   countries.forEach((country) => {
     const commonName = country.name.common;
     const population = country.population
@@ -9,7 +10,7 @@ export const createCountries = (countries) => {
     const flag = country.flags.svg;
 
     const li = document.createElement("li");
-    li.classList.add("cars__item");
+    li.classList.add("cards__item");
     li.innerHTML = `
     <a href="./about.html">
       <img src=${flag} alt="germany-flag" width="267" height="160">
@@ -21,7 +22,6 @@ export const createCountries = (countries) => {
         </div>
     </a>
     `;
-
     cardsEL.appendChild(li)
   });
 };
